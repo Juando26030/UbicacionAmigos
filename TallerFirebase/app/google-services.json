@@ -1,21 +1,22 @@
 {
   "project_info": {
-    "project_number": "261725351061",
-    "project_id": "taller-3-53f90",
-    "storage_bucket": "taller-3-53f90.appspot.com"
+    "project_number": "759038674038",
+    "firebase_url": "https://fir-ubi-8d459-default-rtdb.firebaseio.com",
+    "project_id": "fir-ubi-8d459",
+    "storage_bucket": "fir-ubi-8d459.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:261725351061:android:d53c0b9c81f27dafc67f9c",
+        "mobilesdk_app_id": "1:759038674038:android:b5b53a5339c2db2c2dcb57",
         "android_client_info": {
-          "package_name": "com.co.taller3"
+          "package_name": "com.example.firebaseubi"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCvJjl_agwPXRaCQaxKix50qBmd27WyIlE"
+          "current_key": "AIzaSyBxzuNJW20YfiB4w8I9SUg10LbdHql_T8A"
         }
       ],
       "services": {
