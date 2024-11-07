@@ -133,18 +133,21 @@ class RegistroActivity : AppCompatActivity() {
         longitud: String,
         progressDialog: ProgressDialog
     ) {
-        // Obtener el correo del usuario actual desde Firebase Authentication
         val email = mAuth.currentUser?.email ?: "Correo no disponible"
 
-        // Crear mapa con los datos del usuario, incluyendo el correo
+        // Convertimos latitud y longitud a Double
+        val lat = latitud.toDoubleOrNull() ?: 0.0 // Valor predeterminado si es nulo
+        val lon = longitud.toDoubleOrNull() ?: 0.0 // Valor predeterminado si es nulo
+
+        // Crear el mapa de datos del usuario, con latitud y longitud como Double
         val userData = hashMapOf(
             "nombre" to nombre,
             "apellido" to apellido,
             "cedula" to cedula,
-            "latitud" to latitud,
-            "longitud" to longitud,
-            "correo" to email,   // Añadimos el correo al nodo del usuario
-            "estado" to "Disponible" // Estado inicial de usuario
+            "latitud" to lat, // Ahora es Double
+            "longitud" to lon, // Ahora es Double
+            "correo" to email,
+            "estado" to "Disponible"
         )
 
         // Guardar datos en Realtime Database
@@ -152,7 +155,6 @@ class RegistroActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                // Cerrar sesión y volver a MainActivity
                 mAuth.signOut()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -162,6 +164,7 @@ class RegistroActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error al guardar datos: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
+
 
 
     private fun validarCampos(email: String, password: String, nombre: String, apellido: String, cedula: String, latitud: String, longitud: String): Boolean {

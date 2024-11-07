@@ -25,6 +25,9 @@
         android:theme="@style/Theme.FirebaseUbi"
         tools:targetApi="31">
         <activity
+            android:name=".logica.AmigoUbicacion"
+            android:exported="false" />
+        <activity
             android:name=".logica.CambiarEstado"
             android:exported="false" />
         <activity

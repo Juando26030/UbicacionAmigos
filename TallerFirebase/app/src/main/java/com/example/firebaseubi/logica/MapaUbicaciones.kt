@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.firebaseubi.R
+import com.example.firebaseubi.Usuario
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -24,7 +25,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class MapaUbicaciones : AppCompatActivity(), OnMapReadyCallback {
-
+    private val usersList = mutableListOf<Usuario>()
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mapView: MapView
     private lateinit var map: GoogleMap
@@ -68,7 +69,6 @@ class MapaUbicaciones : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-
     private fun logOut() {
         mAuth.signOut()
         Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
@@ -87,7 +87,6 @@ class MapaUbicaciones : AppCompatActivity(), OnMapReadyCallback {
         val intent = Intent(this, CambiarEstado::class.java)
         startActivity(intent)
     }
-
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
