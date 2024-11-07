@@ -1,9 +1,12 @@
 package com.example.firebaseubi.logica
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,12 +18,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class MapaUbicaciones : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var mAuth: FirebaseAuth
     private lateinit var mapView: MapView
     private lateinit var map: GoogleMap
 
@@ -28,11 +33,61 @@ class MapaUbicaciones : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa_ubicaciones)
 
+        mAuth = FirebaseAuth.getInstance()
+
         // Initialize MapView
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
+
+        //Inicializar el menu
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuLogOut -> {
+                logOut()
+                return true
+            }
+            R.id.menuLista -> {
+                modificarListaAmigos()
+                return true
+            }
+            R.id.menuEstado -> {
+                cambiarEstado()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    private fun logOut() {
+        mAuth.signOut()
+        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    private fun modificarListaAmigos() {
+        Toast.makeText(this, "Modificar información", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, ListaAmigos::class.java)
+        startActivity(intent)
+    }
+
+    private fun cambiarEstado() {
+        Toast.makeText(this, "Cambiar estado", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, CambiarEstado::class.java)
+        startActivity(intent)
+    }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
