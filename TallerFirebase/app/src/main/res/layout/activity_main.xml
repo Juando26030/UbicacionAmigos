@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Bienvenido a la aplicación para espiar a tus amigos ;)"
+        android:text="Bienvenido a la aplicación para acosar a tus amigos ;)"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
